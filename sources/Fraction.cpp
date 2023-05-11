@@ -81,10 +81,10 @@ namespace ariel
 
         check_overflow(num, den, Operation::ADD);
 
-        Fraction f(static_cast<int>(num), static_cast<int>(den));
-        f.reduce();
+        Fraction frac(static_cast<int>(num), static_cast<int>(den));
+        frac.reduce();
 
-        return f;
+        return frac;
     }
 
     Fraction Fraction::operator-(const Fraction &other) const
@@ -92,9 +92,9 @@ namespace ariel
         check_overflow(static_cast<int64_t>(numerator) * other.denominator, static_cast<int64_t>(other.numerator) * denominator, Operation::SUB);
         int num = numerator * other.denominator - other.numerator * denominator;
         int den = denominator * other.denominator;
-        Fraction f(num, den);
-        f.reduce();
-        return f;
+        Fraction frac(num, den);
+        frac.reduce();
+        return frac;
     }
 
     Fraction Fraction::operator*(const Fraction &other) const
@@ -105,9 +105,9 @@ namespace ariel
         int newNumerator = numerator * other.numerator;
         int newDenominator = denominator * other.denominator;
 
-        Fraction f(newNumerator, newDenominator);
-        f.reduce();
-        return f;
+        Fraction frac(newNumerator, newDenominator);
+        frac.reduce();
+        return frac;
     }
 
     Fraction Fraction::operator/(const Fraction &other) const
@@ -119,9 +119,9 @@ namespace ariel
 
         check_overflow(numerator, other.denominator, Operation::MUL);
         check_overflow(denominator, other.numerator, Operation::MUL);
-        Fraction f(numerator * other.denominator, denominator * other.numerator);
-        f.reduce();
-        return f;
+        Fraction frac(numerator * other.denominator, denominator * other.numerator);
+        frac.reduce();
+        return frac;
     }
     // Overloaded operator+ with Fraction and float operand
     Fraction operator+(const Fraction &fraction, float value)
@@ -348,9 +348,9 @@ namespace ariel
         return os;
     }
 
-    istream &operator>>(istream &is, Fraction &fraction)
+    istream &operator>>(istream &ist, Fraction &fraction)
     {
-        if (!(is >> fraction.numerator >> fraction.denominator))
+        if (!(ist >> fraction.numerator >> fraction.denominator))
         {
             throw std::runtime_error("Invalid input format");
         }
@@ -359,7 +359,7 @@ namespace ariel
             throw std::runtime_error("Denominator cannot be zero");
         }
         fraction.reduce();
-        return is;
+        return ist;
     }
 
     // Accessor functions for numerator and denominator
@@ -373,33 +373,36 @@ namespace ariel
         return denominator;
     }
 
-    int Fraction::gcd(int a, int b) const
+    int Fraction::gcd(int num_a, int num_b) const
     {
-        if (b == 0)
+        if (num_b == 0)
         {
-            return a;
+            return num_a;
         }
-        return gcd(b, a % b);
+        return gcd(num_b, num_a % num_b);
     }
 
-    void Fraction::check_overflow(int64_t a, int64_t b, Operation op) const
+    void Fraction::check_overflow(int64_t operand1, int64_t operand2, Operation operation) const
     {
-        switch (op)
+        switch (operation)
         {
         case Operation::ADD:
-            if (a > INT_MAX || a < INT_MIN)
+            if (operand1 > INT_MAX || operand1 < INT_MIN)
             {
                 throw std::overflow_error("Overflow in addition operation");
             }
             break;
         case Operation::SUB:
-            if (a > INT_MAX + b || a < INT_MIN - b)
+            if (operand1 > INT_MAX + operand2 || operand1 < INT_MIN - operand2)
             {
                 throw std::overflow_error("Overflow in subtraction operation");
             }
             break;
         case Operation::MUL:
-            if ((a > 0 && b > 0 && a > INT_MAX / b) || (a > 0 && b < 0 && a > INT_MIN / b) || (a < 0 && b > 0 && a < INT_MIN / b) || (a < 0 && b < 0 && a < INT_MAX / b))
+            if ((operand1 > 0 && operand2 > 0 && operand1 > INT_MAX / operand2) ||
+                (operand1 > 0 && operand2 < 0 && operand1 > INT_MIN / operand2) ||
+                (operand1 < 0 && operand2 > 0 && operand1 < INT_MIN / operand2) ||
+                (operand1 < 0 && operand2 < 0 && operand1 < INT_MAX / operand2))
             {
                 throw std::overflow_error("Overflow in multiplication operation");
             }
