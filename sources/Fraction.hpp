@@ -2,7 +2,7 @@
 
 #include <iostream>
 
-constexpr float EPSILON = 0.0001f;
+constexpr float EPSILON = 0.0001F;
 
 namespace ariel
 {
