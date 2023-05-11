@@ -4,11 +4,12 @@
 #include <cmath>
 #include <climits>
 
+#define EPSILON 0.0001f
+
 using namespace std;
 
 namespace ariel
 {
-
     // Default constructor
     Fraction::Fraction() : numerator(0), denominator(1) {}
 
@@ -412,7 +413,7 @@ namespace ariel
         }
     }
 
-    bool almostEqual(float a, float b, float epsilon = 0.0001f)
+    bool almostEqual(float a, float b, float epsilon = EPSILON)
     {
         return std::abs(a - b) <= epsilon;
     }
