@@ -4,8 +4,6 @@
 #include <cmath>
 #include <climits>
 
-#define EPSILON 0.0001f
-
 using namespace std;
 
 namespace ariel

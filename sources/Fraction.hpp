@@ -2,7 +2,7 @@
 
 #include <iostream>
 
-#define EPSILON 0.0001f
+constexpr float EPSILON = 0.0001f;
 
 namespace ariel
 {
@@ -72,7 +72,7 @@ namespace ariel
         int getDenominator() const;
 
         void check_overflow(int64_t num_a, int64_t num_b, Operation oper) const;
-        int gcd(int a, int b) const;
+        int gcd(int num_a, int num_b) const;
         bool almostEqual(float num_a, float num_b, float epsilon = EPSILON) const;
         void reduce();
 
