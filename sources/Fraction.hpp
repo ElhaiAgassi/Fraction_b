@@ -19,7 +19,7 @@ namespace ariel
         Fraction();
         Fraction(const Fraction &other);
         Fraction(int numerator, int denominator);
-        Fraction(float num);
+        Fraction(float number);
 
         // Arithmetic operators
         Fraction operator+(const Fraction &other) const;
@@ -64,14 +64,14 @@ namespace ariel
         Fraction operator--(int); // Postfix decrement
 
         // Output/Input stream operators
-        friend std::ostream &operator<<(std::ostream &os, const Fraction &fraction);
-        friend std::istream &operator>>(std::istream &is, Fraction &fraction);
+        friend std::ostream &operator<<(std::ostream &ostr, const Fraction &fraction);
+        friend std::istream &operator>>(std::istream &istr, Fraction &fraction);
 
         // Accessor functions for numerator and denominator
         int getNumerator() const;
         int getDenominator() const;
 
-        void check_overflow(int64_t a, int64_t b, Operation op) const;
+        void check_overflow(int64_t num_a, int64_t num_b, Operation oper) const;
         int gcd(int a, int b) const;
         bool almostEqual(float num_a, float num_b, float epsilon = EPSILON) const;
         void reduce();

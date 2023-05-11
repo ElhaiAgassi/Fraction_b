@@ -333,7 +333,7 @@ namespace ariel
 
     // Output/Input stream operators
 
-    std::ostream &operator<<(std::ostream &os, const Fraction &fraction_)
+    std::ostream &operator<<(std::ostream &ostr, const Fraction &fraction_)
     {
         Fraction fraction;
         if (fraction_.denominator < 0)
@@ -345,13 +345,13 @@ namespace ariel
             fraction = fraction_;
         }
 
-        os << fraction.numerator << "/" << fraction.denominator;
-        return os;
+        ostr << fraction.numerator << "/" << fraction.denominator;
+        return ostr;
     }
 
-    istream &operator>>(istream &ist, Fraction &fraction)
+    istream &operator>>(istream &istr, Fraction &fraction)
     {
-        if (!(ist >> fraction.numerator >> fraction.denominator))
+        if (!(istr >> fraction.numerator >> fraction.denominator))
         {
             throw std::runtime_error("Invalid input format");
         }
@@ -360,7 +360,7 @@ namespace ariel
             throw std::runtime_error("Denominator cannot be zero");
         }
         fraction.reduce();
-        return ist;
+        return istr;
     }
 
     // Accessor functions for numerator and denominator
