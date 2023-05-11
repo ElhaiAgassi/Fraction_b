@@ -413,16 +413,16 @@ namespace ariel
         }
     }
 
-    bool almostEqual(float a, float b, float epsilon = EPSILON)
+    bool almostEqual(float num_a, float num_b, float epsilon = EPSILON)
     {
-        return std::abs(a - b) <= epsilon;
+        return std::abs(num_a - num_b) <= epsilon;
     }
 
     void Fraction::reduce()
     {
-        int gcd = std::abs(Fraction::gcd(numerator, denominator));
-        numerator /= gcd;
-        denominator /= gcd;
+        int gcd_ = std::abs(Fraction::gcd(numerator, denominator));
+        numerator /= gcd_;
+        denominator /= gcd_;
 
         if (denominator < 0)
         {

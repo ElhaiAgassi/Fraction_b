@@ -1,15 +1,23 @@
 #pragma once
 
 #include <iostream>
+
+#define EPSILON 0.0001f
+
 namespace ariel
 {
-    enum class Operation { ADD, SUB, MUL};
+    enum class Operation
+    {
+        ADD,
+        SUB,
+        MUL
+    };
 
     class Fraction
     {
     public:
         Fraction();
-        Fraction(const Fraction& other);
+        Fraction(const Fraction &other);
         Fraction(int numerator, int denominator);
         Fraction(float num);
 
@@ -65,14 +73,12 @@ namespace ariel
 
         void check_overflow(int64_t a, int64_t b, Operation op) const;
         int gcd(int a, int b) const;
-        bool almostEqual(float a, float b, float epsilon  = 0.0001) const;
-        void reduce();    
+        bool almostEqual(float num_a, float num_b, float epsilon = EPSILON) const;
+        void reduce();
+
     private:
         int numerator;
         int denominator;
-
     };
-    
-   
 
 }
