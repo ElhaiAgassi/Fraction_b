@@ -11,30 +11,6 @@ namespace ariel
     // Default constructor
     Fraction::Fraction() : numerator(0), denominator(1) {}
 
-    // Copy constructor
-    Fraction::Fraction(const Fraction &other)
-    {
-        if (other.denominator == 0)
-        {
-            throw std::invalid_argument("Denominator cannot be zero");
-        }
-        if (other.denominator > INT_MAX || other.numerator > INT_MAX)
-        {
-            throw std::overflow_error("Numerator or denominator is too large");
-        }
-
-        if (other.denominator < 0)
-        {
-            numerator = -other.numerator;
-            denominator = -other.denominator;
-        }
-
-        this->numerator = other.numerator;
-        this->denominator = other.denominator;
-
-        this->reduce();
-    }
-
     // Constructor with numerator and denominator
     Fraction::Fraction(int numerator, int denominator)
     {

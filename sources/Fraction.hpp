@@ -17,7 +17,6 @@ namespace ariel
     {
     public:
         Fraction();
-        Fraction(const Fraction &other);
         Fraction(int numerator, int denominator);
         Fraction(float number);
 
