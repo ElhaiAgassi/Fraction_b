@@ -5,7 +5,6 @@
 #include <climits>
 
 using namespace std;
-
 namespace ariel
 {
     // Default constructor
@@ -61,6 +60,8 @@ namespace ariel
 
         return frac;
     }
+
+    // ^ the upper code is more efficient than the following code:
 
     Fraction Fraction::operator-(const Fraction &other) const
     {
